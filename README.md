@@ -1,4 +1,4 @@
 # ClinFT
 Clinical free-text assistant
 
-Client demo can be viewed at https://g-cole.github.io/ClinFT/client/
+Front-end demo (outdated - highlights words starting with capital letters) can be viewed at https://g-cole.github.io/ClinFT/frontend-demo
