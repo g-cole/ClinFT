@@ -24,3 +24,6 @@ def get_patient_info(pat_id):
 			'dob' : dob,
 			'age' : age,
 			'gender' : gender}
+
+def get_procedure_info(proc_id):
+	pass
