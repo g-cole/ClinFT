@@ -12,7 +12,7 @@ function handleInput() {
     var text = this.value;
     var highlightedText = applyHighlights(text);
     this.parentNode.getElementsByClassName('clinFT_highlights')[0].innerHTML = highlightedText;
-    indexMarks();
+    processMarks();
 }
 
 function handleScroll() {
@@ -23,9 +23,9 @@ function handleScroll() {
 function applyHighlights(text) {
     text = text
         .replace(/\n$/g, '\n\n')
-        .replace(/[A-F].*?\b/g, '<mark class="greenmark">$&</mark>')
-        .replace(/[G-P].*?\b/g, '<mark class="bluemark">$&</mark>')
-        .replace(/[Q-Z].*?\b/g, '<mark class="redmark">$&</mark>');
+        .replace(/[A-F].*?\b/g, '<mark class="green mark tooltip">$&</mark>')
+        .replace(/[G-P].*?\b/g, '<mark class="blue mark tooltip">$&</mark>')
+        .replace(/[Q-Z].*?\b/g, '<mark class="red mark tooltip">$&</mark>');
     return text;
 }
 
@@ -38,15 +38,35 @@ document.addEventListener('DOMContentLoaded', function(event) {
         }
         clinFTList[i].dispatchEvent(event); //apply highlights to each clinFT instance when page loads
     }
+
+    var tt = document.createElement('div');
+    tt.id = 'tooltip';
+    document.body.appendChild(tt);
 });
 
-function indexMarks(){
-    var greenMarkList = document.getElementsByClassName('greenmark');
-    for (var i = 0; i < greenMarkList.length; i++) {
-        greenMarkList[i].addEventListener('mouseover', handleHover, false);
+//The highlights are behind the textarea, so chain the hover events - UPDATE THIS FOR IE COMPATIBILITY (IE doesn't like "new Event" inline)!!!
+function processMarks(){
+    var markList = document.getElementsByClassName('mark');
+    for (var i = 0; i < markList.length; i++) {
+        markList[i].addEventListener('mousemove', function(e){
+            handleHover(this);
+        }, false);
+        markList[i].parentNode.parentNode.parentNode.getElementsByClassName('clinFT_textarea')[0].addEventListener('mousemove',function(ev){
+            this.style.display = "none"
+            var tar = document.elementFromPoint(ev.clientX, ev.clientY);
+            this.style.display = "block";
+            tar.dispatchEvent(new Event('mousemove'));
+        },false);
     }
 }
 
-function handleHover() {
-    alert(this.innerHTML);
+function handleHover(highlight) {
+    var theText = highlight.innerHTML;
+    //document.getElementById('examType').value = theText;
+    var tooltip = document.getElementById('tooltip')
+    tooltip.innerHTML = theText;
+    hpos = highlight.getBoundingClientRect();
+    tooltip.style.left = hpos.left-70+'px';
+    tooltip.style.top = hpos.top-100+window.scrollY+'px';
+    tooltip.style.visibility = "visible";
 }
