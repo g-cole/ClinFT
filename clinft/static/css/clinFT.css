@@ -63,10 +63,24 @@
 
 #tooltip {
 	position: absolute;
-	width: 200px;
-	height: 100px;
+	width: 250px;
+	height: 80px;
 	visibility: hidden;
-	background-color: black;
-	color:#fff;
-	border-radius: 6px;
+	background-color: white;
+	color: black;
+	border: 1px solid black;
+	box-shadow: 2px 2px 4px rgb(100, 100, 100);
+	padding: 5px;
+}
+
+.btn {
+  border-radius: 4px;
+  box-shadow: 1px 1px 1px rgb(140, 140, 140);
+  color: black;
+  padding: 1px 5px;
+  background: #ffffff;
+  border: solid #b5b5b5 1px;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
 }
