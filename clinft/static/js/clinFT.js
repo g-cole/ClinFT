@@ -44,8 +44,13 @@ document.addEventListener('DOMContentLoaded', function(event) {
     var tt = document.createElement('div');
     tt.id = 'tooltip';
     document.body.appendChild(tt);
-    tt.addEventListener("mouseout", function(){
-        this.style.visibility = "hidden";
+    //mouseout tooltip
+    tt.addEventListener("mouseout", function(event){
+        var e = event.toElement || event.relatedTarget;
+        if (e.parentNode == this || e == this) {
+            return;
+        }
+    this.style.visibility = "hidden";
     });
 });
 
@@ -57,11 +62,14 @@ function processMarks(){
             handleHover(this);
         }, false);
         markList[i].parentNode.parentNode.parentNode.getElementsByClassName('clinFT_textarea')[0].addEventListener('mousemove',function(ev){
-            this.style.display = "none"
+            this.style.display = "none";
             var tar = document.elementFromPoint(ev.clientX, ev.clientY);
             this.style.display = "block";
             //if (!tar.classList.contains('mark') || !tar.classList.contains('btn')) {
-            if (tar != document.getElementById('tooltip') || tar != document.getElementById('tooltip').getElementsByClassName('btn')[0]) {
+            //if (tar != document.getElementById('tooltip') || tar != document.getElementById('tooltip').getElementsByClassName('btn')[0]) {
+            //console.log(tar);
+            //mouseout highlight
+            if (tar != this) {
                 document.getElementById('tooltip').style.visibility = "hidden";
             }
             tar.dispatchEvent(new Event('mousemove'));
@@ -74,8 +82,8 @@ function handleHover(highlight) {
     var theTextL = theText.toLowerCase();
     //document.getElementById('examType').value = theText;
     var tooltip = document.getElementById('tooltip')
-    tooltip.innerHTML = 'Discovered SNOMED concept:<br>' + theText + ' : ' + snomed[theTextL] + '<button class="btn">Apply SNOMED code</button>';
-    //tooltip.innerHTML += '<button class="btn">Apply SNOMED code</button>';
+    tooltip.innerHTML = 'Discovered SNOMED concept:<br>' + theText + ' : ' + snomed[theTextL];
+    tooltip.innerHTML += '<button class="btn">Apply SNOMED code</button>';
     hpos = highlight.getBoundingClientRect();
     tooltip.style.left = hpos.left-125+(hpos.width/2)+'px'; //150 = half tooltip width
     tooltip.style.top = hpos.top-80+window.scrollY+'px'; //80 = tooltip height

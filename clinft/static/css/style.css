@@ -60,3 +60,27 @@ input {
 	font-size: 14px;
 	width: 100%;
 }
+
+.savebtn {
+	cursor: pointer;
+	width: 70px;
+	height: 70px;
+	background-color: rgb(39,40,34);
+	border-radius: 50%;
+	box-shadow: 0 6px 10px 0 #666;
+	transition: all 0.1s ease-in-out;
+
+	font-size: 20px;
+	color: white;
+	text-align: center;
+	line-height: 70px;
+
+	position: fixed;
+	right: 52px;
+	bottom: 52px;
+}
+ 
+.savebtn:hover {
+	box-shadow: 0 6px 14px 0 #666;
+	transform: scale(1.05);
+}
