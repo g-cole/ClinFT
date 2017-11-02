@@ -77,6 +77,12 @@ function processMarks(){
     }
 }
 
+document.addEventListener('click', function() {
+    if (this != document.getElementById('tooltip')){
+        document.getElementById('tooltip').style.visibility = "hidden";
+    }
+});
+
 function handleHover(highlight) {
     var theText = highlight.innerHTML;
     var theTextL = theText.toLowerCase();
