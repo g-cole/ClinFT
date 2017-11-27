@@ -3,6 +3,11 @@ var isIE = !!ua.match(/msie|trident\/7|edge/);
 
 var clinFTList = document.getElementsByClassName('clinFT_textarea');
 
+//add reverse() function to strings for RegEx negative look-behind simulation
+String.prototype.reverse = function () {
+    return this.split('').reverse().join('');
+};
+
 for (var i = 0; i < clinFTList.length; i++) {
     clinFTList[i].addEventListener('input', handleInput, false);
     clinFTList[i].addEventListener('scroll', handleScroll, false);
@@ -22,11 +27,13 @@ function handleScroll() {
 
 function applyHighlights(text) {
     text = text
-        .replace(/\n$/g, '\n\n')
+        .replace(/\n$/g, '\n\n');
+    text = text
         // .replace(/[A-F].*?\b/g, '<mark class="green mark tooltip">$&</mark>')
         // .replace(/[G-P].*?\b/g, '<mark class="blue mark tooltip">$&</mark>')
         // .replace(/[Q-Z].*?\b/g, '<mark class="red mark tooltip">$&</mark>')
-        .replace(re, '<mark class="green mark tooltip">$&</mark>')
+        .reverse().replace(re, '>kram/<$&>"pitloot kram neerg"=ssalc kram<').reverse();
+        //.replace(re, '<mark class="green mark tooltip">$&</mark>')
     return text;
 }
 
@@ -101,4 +108,11 @@ var snomed = {
     "dysphagia" : "40739000",
     "heartburn" : "16331000"
 };
-var re = new RegExp( Object.keys(snomed).join("|"), "ig");
+
+//Javascript doesn't support RegEx negative look-behinds, which could be used to detect negation terms before a word.
+//However, it does support negative look-aheads, so if we reverse the search string and regular expression, we can simulate negative look-behinds.
+//replace:
+//var re = new RegExp(Object.keys(snomed).join("|"), "ig");
+//with:
+var re = new RegExp((")"+Object.keys(snomed).join("|")+"(").reverse()+"(?! on| ton)","ig");
+//and reverse replacement string above as well.
