@@ -104,7 +104,7 @@ function handleHover(highlight) {
 }
 
 var snomed = {
-    "esophageal varices" : "28670008",
+    "(Oesophageal|esophageal)\s*(varices|varix)" : "28670008",
     "dysphagia" : "40739000",
     "heartburn" : "16331000"
 };
