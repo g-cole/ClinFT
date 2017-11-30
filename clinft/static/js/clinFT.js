@@ -1,3 +1,7 @@
+//Garrett Cole
+//University of Utah - BMI 6300 project
+//Textarea highlighting adapted from http://codersblock.com/blog/highlight-text-inside-a-textarea/
+
 var ua = window.navigator.userAgent.toLowerCase();
 var isIE = !!ua.match(/msie|trident\/7|edge/);
 
@@ -6,7 +10,7 @@ var clinFTList = document.getElementsByClassName('clinFT_textarea');
 //add reverse() function to strings for RegEx negative look-behind simulation
 String.prototype.reverse = function () {
     return this.split('').reverse().join('');
-};
+}
 
 for (var i = 0; i < clinFTList.length; i++) {
     clinFTList[i].addEventListener('input', handleInput, false);
@@ -109,9 +113,10 @@ var snomed = {
     "heartburn" : "16331000"
 };
 
-//Javascript doesn't support RegEx negative look-behinds, which could be used to detect negation terms before a word.
-//However, it does support negative look-aheads, so if we reverse the search string and regular expression, we can simulate negative look-behinds.
-//replace:
+//Javascript doesn't support RegEx negative look-behinds, which could be used to detect negation terms before a word. However, it
+//does support negative look-aheads, so if we reverse the search string and regular expression, we can simulate negative look-behinds.
+//Adapted from: http://blog.stevenlevithan.com/archives/mimic-lookbehind-javascript
+//replaced:
 //var re = new RegExp(Object.keys(snomed).join("|"), "ig");
 //with:
 var re = new RegExp((")"+Object.keys(snomed).join("|")+"(").reverse()+"(?! on| ton)","ig");
