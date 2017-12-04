@@ -95,6 +95,6 @@ function handleHover(highlight) {
     tooltip.innerHTML += '<button class="btn">Apply codes</button>';
     hpos = highlight.getBoundingClientRect();
     tooltip.style.left = hpos.left-125+(hpos.width/2)+'px'; //150 = half tooltip width
-    tooltip.style.top = hpos.top-80+window.scrollY+'px'; //80 = tooltip height
+    tooltip.style.top = hpos.top-100+window.scrollY+'px'; //80 = tooltip height
     tooltip.style.visibility = 'visible';
 }
