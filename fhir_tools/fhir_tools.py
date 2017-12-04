@@ -1,4 +1,5 @@
 from fhirclient import client
+from datetime import date
 
 settings = {
 	'app_id': 'clinft',
@@ -16,7 +17,7 @@ def get_patient_info(pat_id):
 
 	name = patient.name[0].given[0]+' '+patient.name[0].family
 	dob = patient.birthDate.isostring #yyyy-mm-dd
-	age = 99
+	age = calculate_age(patient.birthDate.date)
 	gender = patient.gender
 
 	return {'name' : name,
@@ -27,3 +28,7 @@ def get_patient_info(pat_id):
 
 def get_procedure_info(proc_id):
 	pass
+
+def calculate_age(born):
+    today = date.today()
+    return today.year - born.year - ((today.month, today.day) < (born.month, born.day))

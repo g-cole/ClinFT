@@ -7,11 +7,6 @@ var isIE = !!ua.match(/msie|trident\/7|edge/);
 
 var clinFTList = document.getElementsByClassName('clinFT_textarea');
 
-//add reverse() function to strings for RegEx negative look-behind simulation
-String.prototype.reverse = function () {
-    return this.split('').reverse().join('');
-}
-
 for (var i = 0; i < clinFTList.length; i++) {
     clinFTList[i].addEventListener('input', handleInput, false);
     clinFTList[i].addEventListener('scroll', handleScroll, false);
@@ -31,13 +26,11 @@ function handleScroll() {
 
 function applyHighlights(text) {
     text = text
-        .replace(/\n$/g, '\n\n');
-    text = text
-        // .replace(/[A-F].*?\b/g, '<mark class="green mark tooltip">$&</mark>')
-        // .replace(/[G-P].*?\b/g, '<mark class="blue mark tooltip">$&</mark>')
-        // .replace(/[Q-Z].*?\b/g, '<mark class="red mark tooltip">$&</mark>')
-        .reverse().replace(re, '>kram/<$&>"pitloot kram neerg"=ssalc kram<').reverse();
-        //.replace(re, '<mark class="green mark tooltip">$&</mark>')
+        .replace(/\n$/g, '\n\n') //necessary for highlight/textarea alignment
+        .replace(/o?esophageal\s(varices|varix)/gi, '<mark class="green mark tooltip" snomed="28670008" icd10="I85.00">$&</mark>')
+        .replace(/dysphagia/gi, '<mark class="blue mark tooltip" snomed="40739000" icd10="R13.10">$&</mark>')
+        .replace(/heartburn/gi, '<mark class="red mark tooltip" snomed="16331000" icd10="R12">$&</mark>')
+        ;
     return text;
 }
 
@@ -97,27 +90,11 @@ document.addEventListener('click', function() {
 function handleHover(highlight) {
     var theText = highlight.innerHTML;
     var theTextL = theText.toLowerCase();
-    //document.getElementById('examType').value = theText;
-    var tooltip = document.getElementById('tooltip')
-    tooltip.innerHTML = 'Discovered SNOMED concept:<br>' + theText + ' : ' + snomed[theTextL];
-    tooltip.innerHTML += '<button class="btn">Apply SNOMED code</button>';
+    var tooltip = document.getElementById('tooltip');
+    tooltip.innerHTML = 'Discovered concepts for ' + theText + '<br>SNOMED: ' + highlight.getAttribute('snomed') + '<br>ICD10: ' + highlight.getAttribute('icd10');
+    tooltip.innerHTML += '<button class="btn">Apply codes</button>';
     hpos = highlight.getBoundingClientRect();
     tooltip.style.left = hpos.left-125+(hpos.width/2)+'px'; //150 = half tooltip width
     tooltip.style.top = hpos.top-80+window.scrollY+'px'; //80 = tooltip height
     tooltip.style.visibility = 'visible';
 }
-
-var snomed = {
-    "(Oesophageal|esophageal)\s*(varices|varix)" : "28670008",
-    "dysphagia" : "40739000",
-    "heartburn" : "16331000"
-};
-
-//Javascript doesn't support RegEx negative look-behinds, which could be used to detect negation terms before a word. However, it
-//does support negative look-aheads, so if we reverse the search string and regular expression, we can simulate negative look-behinds.
-//Adapted from: http://blog.stevenlevithan.com/archives/mimic-lookbehind-javascript
-//replaced:
-//var re = new RegExp(Object.keys(snomed).join("|"), "ig");
-//with:
-var re = new RegExp((")"+Object.keys(snomed).join("|")+"(").reverse()+"(?! on| ton)","ig");
-//and reverse replacement string above as well.
