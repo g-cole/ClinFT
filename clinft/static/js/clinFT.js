@@ -99,7 +99,7 @@ function handleHover(highlight) {
     var theTextL = theText.toLowerCase();
     //document.getElementById('examType').value = theText;
     var tooltip = document.getElementById('tooltip')
-    tooltip.innerHTML = 'Discovered SNOMED concept:<br>' + theText + ' : ' + snomed[theTextL];
+    tooltip.innerHTML = 'Discovered SNOMED concept:<br>' + snomed[theTextL][1] + ' : ' + snomed[theTextL][0];
     tooltip.innerHTML += '<button class="btn">Apply SNOMED code</button>';
     hpos = highlight.getBoundingClientRect();
     tooltip.style.left = hpos.left-125+(hpos.width/2)+'px'; //150 = half tooltip width
@@ -108,7 +108,7 @@ function handleHover(highlight) {
 }
 
 var snomed = {
-    "esophageal varices" : "28670008",
+    "esophageal varices" : ["28670008", "description"],
     "dysphagia" : "40739000",
     "heartburn" : "16331000"
 };
