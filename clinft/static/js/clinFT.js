@@ -30,12 +30,7 @@ function handleScroll() {
 
 function applyHighlights(text) {
     text = text
-        .replace(/\n$/g, '\n\n');
-    text = text
-        // .replace(/[A-F].*?\b/g, '<mark class="green mark tooltip">$&</mark>')
-        // .replace(/[G-P].*?\b/g, '<mark class="blue mark tooltip">$&</mark>')
-        // .replace(/[Q-Z].*?\b/g, '<mark class="red mark tooltip">$&</mark>')
-        // .replace(re, '<mark class="green mark tooltip">$&</mark>')
+        .replace(/\n$/g, '\n\n') //necessary for highlight/textarea alignment
         // replace reversed found term into reversed highlight class
         .reverse().replace(re, '>kram/<$&>"pitloot kram neerg"=ssalc kram<').reverse()
         .reverse().replace(re2, '>kram/<$&>"pitloot kram eulb"=ssalc kram<').reverse()
@@ -97,13 +92,13 @@ function handleHover(highlight) {
     var theText = highlight.innerHTML;
     var theTextL = theText.toLowerCase();
     var tooltip = document.getElementById('tooltip');
-    if (theTextL in stterm_green){
+    if (theTextL in stterm_green) {
         tooltip.innerHTML = 'Discovered concept "' + stterm_green[theTextL][0] + '"<br>SNOMED: ' + stterm_green[theTextL][2] + '<br>ICD10: ' + stterm_green[theTextL][1];
     }
-    else if (theTextL in stterm_blue){
+    else if (theTextL in stterm_blue) {
         tooltip.innerHTML = 'Discovered concept "' + stterm_blue[theTextL][0] + '"<br>SNOMED: ' + stterm_blue[theTextL][2] + '<br>ICD10: ' + stterm_blue[theTextL][1];
     }
-    else{
+    else {
         tooltip.innerHTML = 'Discovered concept "' + stterm_red[theTextL][0] + '"<br>SNOMED: ' + stterm_red[theTextL][2] + '<br>ICD10: ' + stterm_red[theTextL][1];
     }
     tooltip.innerHTML += '<button class="btn">Apply codes</button>';
@@ -128,7 +123,7 @@ var stterm_red = {
 //Javascript doesn't support RegEx negative look-behinds, which could be used to detect negation terms before a word. However, it
 //does support negative look-aheads, so if we reverse the search string and regular expression, we can simulate negative look-behinds.
 //replaced:
-//var re = new RegExp(Object.keys(snomed).join("|"), "ig");
+//var re = new RegExp(Object.keys(stterm).join("|"), "ig");
 var re = new RegExp((")"+Object.keys(stterm_green).join("|")+"(").reverse()+"(?! on| ton)","ig");
 var re2 = new RegExp((")"+Object.keys(stterm_blue).join("|")+"(").reverse()+"(?! on| ton)","ig");
 var re3 = new RegExp((")"+Object.keys(stterm_red).join("|")+"(").reverse()+"(?! on| ton)","ig");
