@@ -101,32 +101,34 @@ function handleHover(highlight) {
     var theTextL = theText.toLowerCase();
     //document.getElementById('examType').value = theText;
     var tooltip = document.getElementById('tooltip');
-    if (theTextL in snomed_green){
-        tooltip.innerHTML = 'Discovered SNOMED concept:<br>' + snomed_green[theTextL][0] + ' : ' + snomed_green[theTextL][1];
+    //tooltip.innerHTML = 'Discovered concepts for ' + theText + '<br>SNOMED: ' + highlight.getAttribute('snomed') + '<br>ICD10: ' + highlight.getAttribute('icd10');
+    if (theTextL in stterm_green){
+        tooltip.innerHTML = 'Discovered concept for ' + stterm_green[theTextL][0] + '<br>ICD10: ' + stterm_green[theTextL][1] + '<br>SNOMED: ' + stterm_green[theTextL][2];
     }
-    else if (theTextL in snomed_blue){
-        tooltip.innerHTML = 'Discovered SNOMED concept:<br>' + snomed_blue[theTextL][0] + ' : ' + snomed_blue[theTextL][1];
+    else if (theTextL in stterm_blue){
+        tooltip.innerHTML = 'Discovered concept for ' + stterm_blue[theTextL][0] + '<br>ICD10: ' + stterm_blue[theTextL][1] + '<br>SNOMED: ' + stterm_blue[theTextL][2];
     }
     else{
-        tooltip.innerHTML = 'Discovered SNOMED concept:<br>' + snomed_red[theTextL][0] + ' : ' + snomed_red[theTextL][1];
+        tooltip.innerHTML = 'Discovered concept for ' + stterm_red[theTextL][0] + '<br>ICD10: ' + stterm_red[theTextL][1] + '<br>SNOMED: ' + stterm_red[theTextL][2];
     }
     
     tooltip.innerHTML += '<button class="btn">Apply SNOMED code</button>';
     hpos = highlight.getBoundingClientRect();
     tooltip.style.left = hpos.left-125+(hpos.width/2)+'px'; //150 = half tooltip width
-    tooltip.style.top = hpos.top-80+window.scrollY+'px'; //80 = tooltip height
+    tooltip.style.top = hpos.top-118+window.scrollY+'px'; //80 = tooltip height
     tooltip.style.visibility = 'visible';
 }
 
-var snomed_green = {
-    "esophageal varices" : ["Esophageal Varices", "28670008"],
-    "esophageal varix" : ["Esophageal Varices", "28670008"]
+// term_literal : [standard_name, ICD10_code, SNOMED_code]
+var stterm_green = {
+    "esophageal varices" : ["Esophageal Varices", "I85.0", "28670008"],
+    "esophageal varix" : ["Esophageal Varices", "I85.0", "28670008"]
 };
-var snomed_blue = {
-    "dysphagia" : ["Dysphagia", "40739000"]
+var stterm_blue = {
+    "dysphagia" : ["Dysphagia", "R13.1", "40739000"]
 };
-var snomed_red = {
-    "heartburn" : ["Heartburn", "16331000"]
+var stterm_red = {
+    "heartburn" : ["Heartburn", "R12", "16331000"]
 };
 
 //Javascript doesn't support RegEx negative look-behinds, which could be used to detect negation terms before a word. However, it
@@ -135,7 +137,7 @@ var snomed_red = {
 //replaced:
 //var re = new RegExp(Object.keys(snomed).join("|"), "ig");
 //with:
-var re = new RegExp((")"+Object.keys(snomed_green).join("|")+"(").reverse()+"(?! on| ton)","ig");
-var re2 = new RegExp((")"+Object.keys(snomed_blue).join("|")+"(").reverse()+"(?! on| ton)","ig");
-var re3 = new RegExp((")"+Object.keys(snomed_red).join("|")+"(").reverse()+"(?! on| ton)","ig");
+var re = new RegExp((")"+Object.keys(stterm_green).join("|")+"(").reverse()+"(?! on| ton)","ig");
+var re2 = new RegExp((")"+Object.keys(stterm_blue).join("|")+"(").reverse()+"(?! on| ton)","ig");
+var re3 = new RegExp((")"+Object.keys(stterm_red).join("|")+"(").reverse()+"(?! on| ton)","ig");
 //and reverse replacement string above as well.
