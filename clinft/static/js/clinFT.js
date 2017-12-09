@@ -37,7 +37,8 @@ function applyHighlights(text) {
         // .replace(/[G-P].*?\b/g, '<mark class="blue mark tooltip">$&</mark>')
         // .replace(/[Q-Z].*?\b/g, '<mark class="red mark tooltip">$&</mark>')
         .reverse().replace(re, '>kram/<$&>"pitloot kram neerg"=ssalc kram<').reverse()
-        .reverse().replace(re2, '>kram/<$&>"pitloot kram der"=ssalc kram<').reverse();
+        .reverse().replace(re2, '>kram/<$&>"pitloot kram eulb"=ssalc kram<').reverse()
+        .reverse().replace(re3, '>kram/<$&>"pitloot kram der"=ssalc kram<').reverse();
         //.replace(re, '<mark class="green mark tooltip">$&</mark>')
     return text;
 }
@@ -100,11 +101,14 @@ function handleHover(highlight) {
     var theTextL = theText.toLowerCase();
     //document.getElementById('examType').value = theText;
     var tooltip = document.getElementById('tooltip');
-    if (theTextL in snomed){
-        tooltip.innerHTML = 'Discovered SNOMED concept:<br>' + snomed[theTextL][0] + ' : ' + snomed[theTextL][1];
+    if (theTextL in snomed_green){
+        tooltip.innerHTML = 'Discovered SNOMED concept:<br>' + snomed_green[theTextL][0] + ' : ' + snomed_green[theTextL][1];
     }
-    else {
-        tooltip.innerHTML = 'Discovered SNOMED concept:<br>' + snomed_other[theTextL][0] + ' : ' + snomed_other[theTextL][1];
+    else if (theTextL in snomed_blue){
+        tooltip.innerHTML = 'Discovered SNOMED concept:<br>' + snomed_blue[theTextL][0] + ' : ' + snomed_blue[theTextL][1];
+    }
+    else{
+        tooltip.innerHTML = 'Discovered SNOMED concept:<br>' + snomed_red[theTextL][0] + ' : ' + snomed_red[theTextL][1];
     }
     
     tooltip.innerHTML += '<button class="btn">Apply SNOMED code</button>';
@@ -114,14 +118,16 @@ function handleHover(highlight) {
     tooltip.style.visibility = 'visible';
 }
 
-var snomed = {
-    "esophageal varicesx" : ["Esophageal Varices", "28670008"]
-    //"dysphagia" : "40739000",
-    //"heartburn" : "16331000"
+var snomed_green = {
+    "esophageal varices" : ["Esophageal Varices", "28670008"],
+    "esophageal varix" : ["Esophageal Varices", "28670008"]
 };
-var snomed_other = {
+var snomed_blue = {
     "dysphagia" : ["Dysphagia", "40739000"]
-}
+};
+var snomed_red = {
+    "heartburn" : ["Heartburn", "16331000"]
+};
 
 //Javascript doesn't support RegEx negative look-behinds, which could be used to detect negation terms before a word. However, it
 //does support negative look-aheads, so if we reverse the search string and regular expression, we can simulate negative look-behinds.
@@ -129,6 +135,7 @@ var snomed_other = {
 //replaced:
 //var re = new RegExp(Object.keys(snomed).join("|"), "ig");
 //with:
-var re = new RegExp((")"+Object.keys(snomed).join("|")+"(").reverse()+"(?! on| ton)","ig");
-var re2 = new RegExp((")"+Object.keys(snomed_other).join("|")+"(").reverse()+"(?! on| ton)","ig");
+var re = new RegExp((")"+Object.keys(snomed_green).join("|")+"(").reverse()+"(?! on| ton)","ig");
+var re2 = new RegExp((")"+Object.keys(snomed_blue).join("|")+"(").reverse()+"(?! on| ton)","ig");
+var re3 = new RegExp((")"+Object.keys(snomed_red).join("|")+"(").reverse()+"(?! on| ton)","ig");
 //and reverse replacement string above as well.
