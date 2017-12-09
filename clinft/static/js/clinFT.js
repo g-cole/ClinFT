@@ -110,14 +110,14 @@ function handleHover(highlight) {
 
 // term_literal : [standard_name, ICD10_code, SNOMED_code]
 var stterm_green = {
-    "esophageal varices" : ["Esophageal Varices", "I85.0", "28670008"],
-    "esophageal varix" : ["Esophageal Varices", "I85.0", "28670008"]
+    "esophageal varices" : ["Esophageal Varices", "I85.0", "308129003"],
+    "esophageal varix" : ["Esophageal Varices", "I85.0", "308129003"]
 };
 var stterm_blue = {
     "dysphagia" : ["Dysphagia", "R13.1", "40739000"]
 };
 var stterm_red = {
-    "heartburn" : ["Heartburn", "R12", "16331000"]
+    "heartburn" : ["Heartburn", "R12", "722876002"]
 };
 
 //Javascript doesn't support RegEx negative look-behinds, which could be used to detect negation terms before a word. However, it
