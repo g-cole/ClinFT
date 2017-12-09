@@ -98,18 +98,18 @@ function handleHover(highlight) {
     var theTextL = theText.toLowerCase();
     var tooltip = document.getElementById('tooltip');
     if (theTextL in stterm_green){
-        tooltip.innerHTML = 'Discovered concept ' + stterm_green[theTextL][0] + '<br>ICD10: ' + stterm_green[theTextL][1] + '<br>SNOMED: ' + stterm_green[theTextL][2];
+        tooltip.innerHTML = 'Discovered concept "' + stterm_green[theTextL][0] + '"<br>SNOMED: ' + stterm_green[theTextL][2] + '<br>ICD10: ' + stterm_green[theTextL][1];
     }
     else if (theTextL in stterm_blue){
-        tooltip.innerHTML = 'Discovered concept ' + stterm_blue[theTextL][0] + '<br>ICD10: ' + stterm_blue[theTextL][1] + '<br>SNOMED: ' + stterm_blue[theTextL][2];
+        tooltip.innerHTML = 'Discovered concept "' + stterm_blue[theTextL][0] + '"<br>SNOMED: ' + stterm_blue[theTextL][2] + '<br>ICD10: ' + stterm_blue[theTextL][1];
     }
     else{
-        tooltip.innerHTML = 'Discovered concept ' + stterm_red[theTextL][0] + '<br>ICD10: ' + stterm_red[theTextL][1] + '<br>SNOMED: ' + stterm_red[theTextL][2];
+        tooltip.innerHTML = 'Discovered concept "' + stterm_red[theTextL][0] + '"<br>SNOMED: ' + stterm_red[theTextL][2] + '<br>ICD10: ' + stterm_red[theTextL][1];
     }
-    tooltip.innerHTML += '<button class="btn">Apply SNOMED code</button>';
+    tooltip.innerHTML += '<button class="btn">Apply codes</button>';
     hpos = highlight.getBoundingClientRect();
     tooltip.style.left = hpos.left-125+(hpos.width/2)+'px'; //150 = half tooltip width
-    tooltip.style.top = hpos.top-118+window.scrollY+'px'; //118 = tooltip height
+    tooltip.style.top = hpos.top-90+window.scrollY+'px'; //90 = tooltip height
     tooltip.style.visibility = 'visible';
 }
 
