@@ -1,6 +1,5 @@
 //Garrett Cole
-//University of Utah - BMI 6300 project
-//Textarea highlighting adapted from http://codersblock.com/blog/highlight-text-inside-a-textarea/
+//University of Utah - BMI 6300 final project
 
 var ua = window.navigator.userAgent.toLowerCase();
 var isIE = !!ua.match(/msie|trident\/7|edge/);
@@ -36,10 +35,11 @@ function applyHighlights(text) {
         // .replace(/[A-F].*?\b/g, '<mark class="green mark tooltip">$&</mark>')
         // .replace(/[G-P].*?\b/g, '<mark class="blue mark tooltip">$&</mark>')
         // .replace(/[Q-Z].*?\b/g, '<mark class="red mark tooltip">$&</mark>')
+        // .replace(re, '<mark class="green mark tooltip">$&</mark>')
+        // replace reversed found term into reversed highlight class
         .reverse().replace(re, '>kram/<$&>"pitloot kram neerg"=ssalc kram<').reverse()
         .reverse().replace(re2, '>kram/<$&>"pitloot kram eulb"=ssalc kram<').reverse()
         .reverse().replace(re3, '>kram/<$&>"pitloot kram der"=ssalc kram<').reverse();
-        //.replace(re, '<mark class="green mark tooltip">$&</mark>')
     return text;
 }
 
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
     });
 });
 
-//The highlights are behind the textarea, so chain the hover events - UPDATE THIS FOR IE COMPATIBILITY (IE doesn't like "new Event" inline)!!!
+//The highlights are behind the textarea, so chain the hover events
 function processMarks(){
     var markList = document.getElementsByClassName('mark');
     for (var i = 0; i < markList.length; i++) {
@@ -78,14 +78,11 @@ function processMarks(){
             this.style.display = "none";
             var tar = document.elementFromPoint(ev.clientX, ev.clientY);
             this.style.display = "block";
-            //if (!tar.classList.contains('mark') || !tar.classList.contains('btn')) {
-            //if (tar != document.getElementById('tooltip') || tar != document.getElementById('tooltip').getElementsByClassName('btn')[0]) {
-            //console.log(tar);
             //mouseout highlight
             if (tar != this) {
                 document.getElementById('tooltip').style.visibility = "hidden";
             }
-            tar.dispatchEvent(new Event('mousemove'));
+            tar.dispatchEvent(new Event('mousemove'));//UPDATE THIS FOR IE COMPATIBILITY (IE doesn't like "new Event" inline)
         },false);
     }
 }
@@ -99,9 +96,7 @@ document.addEventListener('click', function() {
 function handleHover(highlight) {
     var theText = highlight.innerHTML;
     var theTextL = theText.toLowerCase();
-    //document.getElementById('examType').value = theText;
     var tooltip = document.getElementById('tooltip');
-    //tooltip.innerHTML = 'Discovered concepts for ' + theText + '<br>SNOMED: ' + highlight.getAttribute('snomed') + '<br>ICD10: ' + highlight.getAttribute('icd10');
     if (theTextL in stterm_green){
         tooltip.innerHTML = 'Discovered concept for ' + stterm_green[theTextL][0] + '<br>ICD10: ' + stterm_green[theTextL][1] + '<br>SNOMED: ' + stterm_green[theTextL][2];
     }
@@ -133,11 +128,8 @@ var stterm_red = {
 
 //Javascript doesn't support RegEx negative look-behinds, which could be used to detect negation terms before a word. However, it
 //does support negative look-aheads, so if we reverse the search string and regular expression, we can simulate negative look-behinds.
-//Adapted from: http://blog.stevenlevithan.com/archives/mimic-lookbehind-javascript
 //replaced:
 //var re = new RegExp(Object.keys(snomed).join("|"), "ig");
-//with:
 var re = new RegExp((")"+Object.keys(stterm_green).join("|")+"(").reverse()+"(?! on| ton)","ig");
 var re2 = new RegExp((")"+Object.keys(stterm_blue).join("|")+"(").reverse()+"(?! on| ton)","ig");
 var re3 = new RegExp((")"+Object.keys(stterm_red).join("|")+"(").reverse()+"(?! on| ton)","ig");
-//and reverse replacement string above as well.
