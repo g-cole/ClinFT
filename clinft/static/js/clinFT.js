@@ -110,7 +110,7 @@ function handleHover(highlight) {
 
 // term_literal : [standard_name, ICD10_code, SNOMED_code]
 var stterm_green = {
-<<<<<<< HEAD
+
     "esophageal varices" : ["Esophageal Varices", "I85.0", "308129003"],
     "esophageal varix" : ["Esophageal Varices", "I85.0", "308129003"],
     "oesophageal varices" : ["Esophageal Varices", "I85.0", "308129003"],
@@ -125,14 +125,13 @@ var stterm_green = {
     "oesophageal varices with bleeding" : ["Bleeding Esophageal Varices", "I85.01", "17709002"],
     "oesophageal varix with blood" : ["Bleeding Esophageal Varices", "I85.01", "17709002"],
     "esophageal varices with blood" : ["Bleeding Esophageal Varices", "I85.01", "17709002"],
+    "oesophageal varix w blood" : ["Bleeding Esophageal Varices", "I85.01", "17709002"],
+    "esophageal varices w blood" : ["Bleeding Esophageal Varices", "I85.01", "17709002"],
     "oesophageal varix without bleeding" : ["Esophageal Varices Without Bleeding", "I85.00", "195476002"],
     "esophageal varices without bleeding" : ["Esophageal Varices Without Bleeding", "I85.00", "195476002"],
     "oesophageal varix without blood" : ["Esophageal Varices Without Bleeding", "I85.00", "195476002"],
-    "esophageal varices without blood" : ["Esophageal Varices Without Bleeding", "I85.00", "195476002"],
-=======
-    "esophageal varices" : ["Esophageal Varices", "I85.0", "308129003"],
-    "esophageal varix" : ["Esophageal Varices", "I85.0", "308129003"]
->>>>>>> 7cfec3064286b5c32a013d91e9381907f921b827
+    "esophageal varices without blood" : ["Esophageal Varices Without Bleeding", "I85.00", "195476002"]
+
 };
 var stterm_blue = {
     "dysphagia" : ["Dysphagia", "R13.1", "40739000"]
