@@ -121,8 +121,8 @@ var stterm_green = {
     "bleeding oesophageal varix" : ["Bleeding Esophageal Varices", "I85.01", "17709002"],
     "oesophageal varix with bleeding" : ["Bleeding Esophageal Varices", "I85.01", "17709002"],
     "esophageal varix with bleeding" : ["Bleeding Esophageal Varices", "I85.01", "17709002"],
-    "esophageal varices with bleeding" : ["Bleeding Esophageal Varices", "I85.01", "17709002"],
-    "oesophageal varices with bleeding" : ["Bleeding Esophageal Varices", "I85.01", "17709002"],
+    "esophageal varices w bleeding" : ["Bleeding Esophageal Varices", "I85.01", "17709002"],
+    "oesophageal varices w bleeding" : ["Bleeding Esophageal Varices", "I85.01", "17709002"],
     "oesophageal varix with blood" : ["Bleeding Esophageal Varices", "I85.01", "17709002"],
     "esophageal varices with blood" : ["Bleeding Esophageal Varices", "I85.01", "17709002"],
     "oesophageal varix w blood" : ["Bleeding Esophageal Varices", "I85.01", "17709002"],
@@ -130,7 +130,11 @@ var stterm_green = {
     "oesophageal varix without bleeding" : ["Esophageal Varices Without Bleeding", "I85.00", "195476002"],
     "esophageal varices without bleeding" : ["Esophageal Varices Without Bleeding", "I85.00", "195476002"],
     "oesophageal varix without blood" : ["Esophageal Varices Without Bleeding", "I85.00", "195476002"],
-    "esophageal varices without blood" : ["Esophageal Varices Without Bleeding", "I85.00", "195476002"]
+    "esophageal varices without blood" : ["Esophageal Varices Without Bleeding", "I85.00", "195476002"],
+    "oesophageal varix w/o bleeding" : ["Esophageal Varices Without Bleeding", "I85.00", "195476002"],
+    "esophageal varices w/o bleeding" : ["Esophageal Varices Without Bleeding", "I85.00", "195476002"],
+    "oesophageal varix w/o blood" : ["Esophageal Varices Without Bleeding", "I85.00", "195476002"],
+    "esophageal varices w/o blood" : ["Esophageal Varices Without Bleeding", "I85.00", "195476002"]
 
 };
 var stterm_blue = {
