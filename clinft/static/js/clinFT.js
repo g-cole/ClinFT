@@ -110,10 +110,11 @@ function handleHover(highlight) {
 
 // term_literal : [standard_name, ICD10_code, SNOMED_code]
 var stterm_green = {
-    "esophageal varices" : ["Esophageal Varices", "I85.0", "28670008"],
-    "esophageal varix" : ["Esophageal Varices", "I85.0", "28670008"],
-    "oesophageal varices" : ["Esophageal Varices", "I85.0", "28670008"],
-    "oesophageal varix" : ["Esophageal Varices", "I85.0", "28670008"],
+<<<<<<< HEAD
+    "esophageal varices" : ["Esophageal Varices", "I85.0", "308129003"],
+    "esophageal varix" : ["Esophageal Varices", "I85.0", "308129003"],
+    "oesophageal varices" : ["Esophageal Varices", "I85.0", "308129003"],
+    "oesophageal varix" : ["Esophageal Varices", "I85.0", "308129003"],
     "bleeding esophageal varices" : ["Bleeding Esophageal Varices", "I85.01", "17709002"],
     "bleeding esophageal varix" : ["Bleeding Esophageal Varices", "I85.01", "17709002"],
     "bleeding oesophageal varices" : ["Bleeding Esophageal Varices", "I85.01", "17709002"],
@@ -128,12 +129,16 @@ var stterm_green = {
     "esophageal varices without bleeding" : ["Esophageal Varices Without Bleeding", "I85.00", "195476002"],
     "oesophageal varix without blood" : ["Esophageal Varices Without Bleeding", "I85.00", "195476002"],
     "esophageal varices without blood" : ["Esophageal Varices Without Bleeding", "I85.00", "195476002"],
+=======
+    "esophageal varices" : ["Esophageal Varices", "I85.0", "308129003"],
+    "esophageal varix" : ["Esophageal Varices", "I85.0", "308129003"]
+>>>>>>> 7cfec3064286b5c32a013d91e9381907f921b827
 };
 var stterm_blue = {
     "dysphagia" : ["Dysphagia", "R13.1", "40739000"]
 };
 var stterm_red = {
-    "heartburn" : ["Heartburn", "R12", "16331000"]
+    "heartburn" : ["Heartburn", "R12", "722876002"]
 };
 
 //Javascript doesn't support RegEx negative look-behinds, which could be used to detect negation terms before a word. However, it
