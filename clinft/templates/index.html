@@ -106,14 +106,14 @@
             <td class="top"><label for="dxcode">Diagnosis Code(s):</label></td>
             <td colspan=3>
                 <!--<textarea class="non_clinFT_textarea" name="dxcode" id="dxcode" style="height: 116px; margin-top: -10px;" disabled>{{procedure.condition}}</textarea>-->
-                <div id="dxcode">{{procedure.condition}}</div>
+                <div id="dxcode" style="height: 116px">{{procedure.condition|safe}}</div>
             </td>
         </tr>
         <!--<tr>
             <td></td><td colspan=3>CPT &#174; 2017 American Medical Association. All Rights Reserved.</td>
         </tr>-->
         <tr>
-            <td colspan=2><br><br><br><br><br><p>___________________________________<br>James Brown, M.D.<br>10/10/2017 10:10:10 AM</p><p>This report has not yet been signed.</p><br></td>
+            <td colspan=2><br><br><p>___________________________________<br>James Brown, M.D.<br>10/10/2017 10:10:10 AM</p><p>This report has not yet been signed.</p><br></td>
             <td colspan=2></td>
         </tr>
         <tr>

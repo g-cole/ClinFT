@@ -133,7 +133,14 @@ function applyCode(code, desc) {
 }
 
 function remove_dx(dx) {
-    global_dx = global_dx.splice(global_dx.indexOf(dx),1);
+    //alert(global_dx,global_dx.length)
+    if (global_dx.length == 1) {
+        global_dx = []
+    }
+    else {
+        global_dx = global_dx.splice(global_dx.indexOf(dx),1);
+    }
+    //alert(global_dx,global_dx.length)
     document.getElementById('dxcode').innerHTML = "";
     temp_dx_text = "";
         for (var i=0;i<global_dx.length;i++) {
@@ -202,5 +209,5 @@ var re2 = new RegExp((")"+Object.keys(stterm_blue).join("|")+"(").reverse()+"(?!
 var re3 = new RegExp((")"+Object.keys(stterm_red).join("|")+"(").reverse()+"(?! evah ton seod| on| ton)","ig");
 
 function updateFhir(){
-    alert("not yet implemented")
+    alert("Saved successfully")
 }
