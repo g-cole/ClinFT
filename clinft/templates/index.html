@@ -16,7 +16,7 @@
             <td class="padtop"><label for="patientName">Patient Name:</label></td>
             <td class="padtop"><input name="patientName" id="patientName" type="text" value="{{patient.name}}"></td>
             <td class="padtop"><label for="patientId">ID:</label></td>
-            <td class="padtop"><input name="patientId" id="patientId" type="text" value="{{patient.id}}"></td>
+            <td class="padtop"><input name="patientId" id="patientId" type="text" value="{{patient.id}}" disabled></td>
         </tr>
         <tr>
             <td><label for="patientDOB">Date of Birth:</label></td>
@@ -45,7 +45,7 @@
         </tr>
         <tr>
             <td class="bborder"><label for="examType">Exam Type:</label></td>
-            <td class="bborder" colspan=3><input name="examType" id="examType" type="text" value="Esophagogastroduodenoscopy"></td>
+            <td class="bborder" colspan=3><input name="examType" id="examType" type="text" value="{{procedure.exam_type}}"></td>
         </tr>
         <tr>
             <td class="top padtop"><label for="indications">Indications:</label></td>
@@ -54,7 +54,8 @@
                     <div class="clinFT_backdrop">
                         <div class="clinFT_highlights"></div>
                     </div>
-                    <textarea class="clinFT_textarea" name="indications" id="indications">Dysphagia, Esophageal Varices due to Cirrhosis of the liver, Heartburn not currently controlled by a Proton Pump Inhibitor.</textarea>
+                    <!--<textarea class="clinFT_textarea" name="indications" id="indications">Dysphagia, Esophageal Varices due to Cirrhosis of the liver, Heartburn not currently controlled by a Proton Pump Inhibitor.</textarea>-->
+                    <textarea class="clinFT_textarea" name="indications" id="indications">{{procedure.indications}}</textarea>
                 </div>
             </td>
         </tr>
@@ -108,14 +109,15 @@
                     <div class="clinFT_backdrop">
                         <div class="clinFT_highlights"></div>
                     </div>
-                    <textarea class="clinFT_textarea" name="dxcode" id="dxcode">K22.7 Barrett's Esophagus
-K29.7 Gastritis, unspecified</textarea>
+                    <!--<textarea class="clinFT_textarea" name="dxcode" id="dxcode">K22.7 Barrett's Esophagus
+K29.7 Gastritis, unspecified</textarea>-->
+                    <textarea class="clinFT_textarea" name="dxcode" id="dxcode">{{procedure.condition}}</textarea>
                 </div>
             </td>
         </tr>
-        <tr>
+        <!--<tr>
             <td></td><td colspan=3>CPT &#174; 2017 American Medical Association. All Rights Reserved.</td>
-        </tr>
+        </tr>-->
         <tr>
             <td colspan=2><br><br><br><br><br><p>___________________________________<br>James Brown, M.D.<br>10/10/2017 10:10:10 AM</p><p>This report has not yet been signed.</p><br></td>
             <td colspan=2></td>
