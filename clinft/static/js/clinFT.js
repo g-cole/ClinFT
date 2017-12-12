@@ -3,6 +3,7 @@
 
 var ua = window.navigator.userAgent.toLowerCase();
 var isIE = !!ua.match(/msie|trident\/7|edge/);
+var global_dx = []
 
 var clinFTList = document.getElementsByClassName('clinFT_textarea');
 
@@ -112,7 +113,15 @@ function handleHover(highlight) {
 }
 
 function applyCode(code, text) {
-    alert("it worked:"+code+text)
+    //alert("it worked:"+code+text)
+    global_dx.push({
+        code:   text
+    });
+    document.getElementById('dxcode').innerHTML = '';
+    for (code in global_dx[0]){
+        //console.log( key + ": " + filters[0][key]);
+        document.getElementById('dxcode').innerHTML += code + ": " + global_dx[0][code];
+    }
 }
 
 // term_literal : [standard_name, ICD10_code, SNOMED_code]

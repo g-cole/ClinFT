@@ -105,14 +105,7 @@
         <tr>
             <td class="top"><label for="dxcode">Diagnosis Code(s):</label></td>
             <td colspan=3>
-                <div class="clinFT_container">
-                    <div class="clinFT_backdrop">
-                        <div class="clinFT_highlights"></div>
-                    </div>
-                    <!--<textarea class="clinFT_textarea" name="dxcode" id="dxcode">K22.7 Barrett's Esophagus
-K29.7 Gastritis, unspecified</textarea>-->
-                    <textarea class="clinFT_textarea" name="dxcode" id="dxcode">{{procedure.condition}}</textarea>
-                </div>
+                <textarea class="non_clinFT_textarea" name="dxcode" id="dxcode">{{procedure.condition}}</textarea>
             </td>
         </tr>
         <!--<tr>
