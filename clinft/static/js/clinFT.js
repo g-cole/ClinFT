@@ -110,8 +110,32 @@ function handleHover(highlight) {
 
 // term_literal : [standard_name, ICD10_code, SNOMED_code]
 var stterm_green = {
+
     "esophageal varices" : ["Esophageal Varices", "I85.0", "308129003"],
-    "esophageal varix" : ["Esophageal Varices", "I85.0", "308129003"]
+    "esophageal varix" : ["Esophageal Varices", "I85.0", "308129003"],
+    "oesophageal varices" : ["Esophageal Varices", "I85.0", "308129003"],
+    "oesophageal varix" : ["Esophageal Varices", "I85.0", "308129003"],
+    "bleeding esophageal varices" : ["Bleeding Esophageal Varices", "I85.01", "17709002"],
+    "bleeding esophageal varix" : ["Bleeding Esophageal Varices", "I85.01", "17709002"],
+    "bleeding oesophageal varices" : ["Bleeding Esophageal Varices", "I85.01", "17709002"],
+    "bleeding oesophageal varix" : ["Bleeding Esophageal Varices", "I85.01", "17709002"],
+    "oesophageal varix with bleeding" : ["Bleeding Esophageal Varices", "I85.01", "17709002"],
+    "esophageal varix with bleeding" : ["Bleeding Esophageal Varices", "I85.01", "17709002"],
+    "esophageal varices w bleeding" : ["Bleeding Esophageal Varices", "I85.01", "17709002"],
+    "oesophageal varices w bleeding" : ["Bleeding Esophageal Varices", "I85.01", "17709002"],
+    "oesophageal varix with blood" : ["Bleeding Esophageal Varices", "I85.01", "17709002"],
+    "esophageal varices with blood" : ["Bleeding Esophageal Varices", "I85.01", "17709002"],
+    "oesophageal varix w blood" : ["Bleeding Esophageal Varices", "I85.01", "17709002"],
+    "esophageal varices w blood" : ["Bleeding Esophageal Varices", "I85.01", "17709002"],
+    "oesophageal varix without bleeding" : ["Esophageal Varices Without Bleeding", "I85.00", "195476002"],
+    "esophageal varices without bleeding" : ["Esophageal Varices Without Bleeding", "I85.00", "195476002"],
+    "oesophageal varix without blood" : ["Esophageal Varices Without Bleeding", "I85.00", "195476002"],
+    "esophageal varices without blood" : ["Esophageal Varices Without Bleeding", "I85.00", "195476002"],
+    "oesophageal varix w/o bleeding" : ["Esophageal Varices Without Bleeding", "I85.00", "195476002"],
+    "esophageal varices w/o bleeding" : ["Esophageal Varices Without Bleeding", "I85.00", "195476002"],
+    "oesophageal varix w/o blood" : ["Esophageal Varices Without Bleeding", "I85.00", "195476002"],
+    "esophageal varices w/o blood" : ["Esophageal Varices Without Bleeding", "I85.00", "195476002"]
+
 };
 var stterm_blue = {
     "dysphagia" : ["Dysphagia", "R13.1", "40739000"]
@@ -124,6 +148,7 @@ var stterm_red = {
 //does support negative look-aheads, so if we reverse the search string and regular expression, we can simulate negative look-behinds.
 //replaced:
 //var re = new RegExp(Object.keys(stterm).join("|"), "ig");
-var re = new RegExp((")"+Object.keys(stterm_green).join("|")+"(").reverse()+"(?! on| ton)","ig");
-var re2 = new RegExp((")"+Object.keys(stterm_blue).join("|")+"(").reverse()+"(?! on| ton)","ig");
-var re3 = new RegExp((")"+Object.keys(stterm_red).join("|")+"(").reverse()+"(?! on| ton)","ig");
+//var re = new RegExp((")"+Object.keys(stterm_green).join("|")+"(").reverse()+"(?! on| ton)","ig");
+var re = new RegExp((")"+Object.keys(stterm_green).join("|")+"(").reverse()+"(?! evah ton seod| on| ton)","ig");
+var re2 = new RegExp((")"+Object.keys(stterm_blue).join("|")+"(").reverse()+"(?! evah ton seod| on| ton)","ig");
+var re3 = new RegExp((")"+Object.keys(stterm_red).join("|")+"(").reverse()+"(?! evah ton seod| on| ton)","ig");
