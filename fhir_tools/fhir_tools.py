@@ -54,12 +54,9 @@ def get_procedure_info(proc_id):
 
 #push to FHIR server with "put" to update record
 	
-
-
-	
 	return {'exam_type' : exam_type,
 			'indications' : indications,
-			'condition' : cond_fmt#test["code"]["coding"][0]["code"]
+			'condition' : cond_fmt
 			}
 
 def calculate_age(born):
