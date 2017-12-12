@@ -36,7 +36,7 @@ def get_procedure_info(proc_id):
 
 	exam_type = proc.code.coding[0].display
 	indications = proc.reasonCode[0].text
-	conditions = proc.reasonReference#[0].reference.code.coding[0].display
+	conditions = proc.reasonReference[0].reference#.code.coding[0].display
 
 	#import fhirclient.models.condition as c
 	#condition = c.Condition.read('8', smart.server)
