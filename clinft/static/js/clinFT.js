@@ -112,16 +112,35 @@ function handleHover(highlight) {
     tooltip.style.visibility = 'visible';
 }
 
-function applyCode(code, text) {
-    //alert("it worked:"+code+text)
-    global_dx.push({
-        code:   text
-    });
-    document.getElementById('dxcode').innerHTML = '';
-    for (code in global_dx[0]){
-        //console.log( key + ": " + filters[0][key]);
-        document.getElementById('dxcode').innerHTML += code + ": " + global_dx[0][code];
+function applyCode(code, desc) {
+    var flag = true;
+    for (i=0;i<global_dx.length;i++) {
+        if (global_dx[i][0] == code) {
+            flag = false;
+        }
     }
+    if (flag == true){
+        document.getElementById('dxcode').innerHTML = "";
+        global_dx.push([code, desc]);
+        temp_dx_text = "";
+        for (var i=0;i<global_dx.length;i++) {
+            temp_dx_text += global_dx[i][0] + ' : ' + global_dx[i][1] + ' <a style="color: #0000EE; cursor: pointer;" onClick="remove_dx(' + global_dx[i][0] + ')">x</a><br>';
+
+        }
+        document.getElementById('dxcode').innerHTML = temp_dx_text;
+    }
+    
+}
+
+function remove_dx(dx) {
+    global_dx = global_dx.splice(global_dx.indexOf(dx),1);
+    document.getElementById('dxcode').innerHTML = "";
+    temp_dx_text = "";
+        for (var i=0;i<global_dx.length;i++) {
+            temp_dx_text += global_dx[i][0] + ' : ' + global_dx[i][1] + ' <a style="color: #0000EE; cursor: pointer;" onClick="remove_dx(' + global_dx[i][0] + ')">x</a><br>';
+
+        }
+        document.getElementById('dxcode').innerHTML = temp_dx_text;
 }
 
 // term_literal : [standard_name, ICD10_code, SNOMED_code]

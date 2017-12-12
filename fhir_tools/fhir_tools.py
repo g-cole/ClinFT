@@ -1,5 +1,7 @@
 from fhirclient import client
 from datetime import date
+import urllib.request
+import json
 
 settings = {
 	'app_id': 'clinft',
@@ -35,28 +37,26 @@ def get_procedure_info(proc_id):
 
 	exam_type = proc.code.coding[0].display
 	indications = proc.reasonCode[0].text
-	conditions = proc.reasonReference[0].reference#.code.coding[0].display
 
-	#import fhirclient.models.condition as c
-	#condition = c.Condition.read('8', smart.server)
-	#condition_text = 'hi'#condition.code.coding[0].display
-
-	#search = c.Condition.where(struct={'id': '8'})
-	#condition1text = condition1.perform_resources(smart.server)
-	#for condition in proc.reasonReference
-
-
-#search = p.Procedure.where(struct={'subject': 'hca-pat-1', 'status': 'completed'})
-#procedures = search.perform_resources(smart.server)
-#for procedure in procedures:
-#    procedure.as_json()
-#    # {'status': u'completed', 'code': {'text': u'Lumpectomy w/ SN', ...
+	cond_ids = []
+	for cond in proc.reasonReference:
+		cond_json = json.loads(urllib.request.urlopen(settings['api_base'] + '/Condition/' + cond.reference.split('/')[1]).read())
+		cond_ids.append(
+			(
+				cond_json['code']['coding'][0]["code"],
+				cond_json['code']['coding'][0]['display']
+			)
+		)
+	import fhirclient.models.condition as c
+	
+#put
+	
 
 
 	
 	return {'exam_type' : exam_type,
 			'indications' : indications,
-			'condition' : conditions
+			'condition' : cond_ids#test["code"]["coding"][0]["code"]
 			}
 
 def calculate_age(born):
