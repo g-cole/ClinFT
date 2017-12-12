@@ -133,14 +133,22 @@ function applyCode(code, desc) {
 }
 
 function remove_dx(dx) {
-    //alert(global_dx,global_dx.length)
+    //alert(global_dx.length)
+    //alert(dx)
     if (global_dx.length == 1) {
-        global_dx = []
+        global_dx = [];
     }
     else {
-        global_dx = global_dx.splice(global_dx.indexOf(dx),1);
+        for (var i=0;i<global_dx.length;i++) {
+            if (global_dx[i][0] == dx){
+                global_dx.splice(i,1);
+            }
+        }
+
+        //alert(global_dx.indexOf(dx))
+        //global_dx = global_dx.splice(global_dx.indexOf(String(dx)),1);
     }
-    //alert(global_dx,global_dx.length)
+    //alert(global_dx,global_dx.length,dx)
     document.getElementById('dxcode').innerHTML = "";
     temp_dx_text = "";
         for (var i=0;i<global_dx.length;i++) {

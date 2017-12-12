@@ -3,7 +3,7 @@
     src: url(opensans-regular.ttf);
 }
 
-.clinFT_container, .clinFT_backdrop, .clinFT_textarea, .non_clinFT_textarea {
+.clinFT_container, .clinFT_backdrop, .clinFT_textarea {
 	width: 698px;
 	height: 49px;
 }
@@ -33,18 +33,6 @@
 }
 
 .clinFT_textarea {
-	display: block;
-	position: absolute;
-	z-index: 2;
-	margin: 0;
-	background-color: transparent;
-	overflow: auto;
-	resize: none;
-	border: 0px;
-	padding: 0px;
-}
-
-.non_clinFT_textarea {
 	display: block;
 	position: absolute;
 	z-index: 2;

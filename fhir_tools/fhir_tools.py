@@ -49,7 +49,7 @@ def get_procedure_info(proc_id):
 		)
 	cond_fmt = ""
 	for cond in cond_id_desc:
-		cond_fmt += cond[0] + ' : ' + cond[1] + '<br>'
+		cond_fmt += cond[0] + ' : ' + cond[1] + ' <a style="color: #0000EE; cursor: pointer;" onClick="remove_dx(' + cond[0] + ')">x</a><br>'
 
 
 #push to FHIR server with "put" to update record
