@@ -170,7 +170,20 @@ var stterm_green = {
     "esophageal varices w/o bleeding" : ["Esophageal Varices Without Bleeding", "I85.00", "195476002"],
     "oesophageal varix w/o blood" : ["Esophageal Varices Without Bleeding", "I85.00", "195476002"],
     "esophageal varices w/o blood" : ["Esophageal Varices Without Bleeding", "I85.00", "195476002"]
-
+    /*,
+    "downhill oesophageal varix" : ["Downhill Esophageal Varices", "I85.00", "721160006"],
+    "downhill oesophageal varices" : ["Downhill Esophageal Varices", "I85.00", "721160006"],
+    "downhill esophageal varices" : ["Downhill Esophageal Varices", "I85.00", "721160006"],
+    "downhill esophageal varix" : ["Downhill Esophageal Varices", "I85.00", "721160006"],
+    "solitary oesophageal varix" : ["Solitary Varix of Esophagus", "I85.00", "721206006"],
+    "solitary oesophageal varices" : ["Solitary Varix of Esophagus", "I85.00", "721206006"],
+    "solitary esophageal varices" : ["Solitary Varix of Esophagus", "I85.00", "721206006"],
+    "solitary esophageal varix" : ["Solitary Varix of Esophagus", "I85.00", "721206006"].
+    "solitary varix of oesophagus" : ["Solitary Varix of Esophagus", "I85.00", "721206006"],
+    "solitary oesophageal varices" : ["Solitary Varix of Esophagus", "I85.00", "721206006"],
+    "solitary esophageal varices" : ["Solitary Varix of Esophagus", "I85.00", "721206006"],
+    "solitary esophageal varix" : ["Solitary Varix of Esophagus", "I85.00", "721206006"]
+*/
 };
 var stterm_blue = {
     "dysphagia" : ["Dysphagia", "R13.1", "40739000"]
