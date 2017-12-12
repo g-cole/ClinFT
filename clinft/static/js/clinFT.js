@@ -94,18 +94,25 @@ function handleHover(highlight) {
     var tooltip = document.getElementById('tooltip');
     if (theTextL in stterm_green) {
         tooltip.innerHTML = 'Discovered concept "' + stterm_green[theTextL][0] + '"<br>SNOMED: ' + stterm_green[theTextL][2] + '<br>ICD10: ' + stterm_green[theTextL][1];
+        tooltip.innerHTML += '<button class="btn" onClick="applyCode(' + stterm_green[theTextL][2] + ',\''+ stterm_green[theTextL][0] +'\')">Apply codes</button>';
     }
     else if (theTextL in stterm_blue) {
         tooltip.innerHTML = 'Discovered concept "' + stterm_blue[theTextL][0] + '"<br>SNOMED: ' + stterm_blue[theTextL][2] + '<br>ICD10: ' + stterm_blue[theTextL][1];
+        tooltip.innerHTML += '<button class="btn" onClick="applyCode(' + stterm_blue[theTextL][2] + ',\''+ stterm_blue[theTextL][0] +'\')">Apply codes</button>';
     }
     else {
         tooltip.innerHTML = 'Discovered concept "' + stterm_red[theTextL][0] + '"<br>SNOMED: ' + stterm_red[theTextL][2] + '<br>ICD10: ' + stterm_red[theTextL][1];
+        tooltip.innerHTML += '<button class="btn" onClick="applyCode(' + stterm_red[theTextL][2] + ',\''+ stterm_red[theTextL][0] +'\')">Apply codes</button>';
     }
-    tooltip.innerHTML += '<button class="btn">Apply codes</button>';
+    
     hpos = highlight.getBoundingClientRect();
     tooltip.style.left = hpos.left-125+(hpos.width/2)+'px'; //150 = half tooltip width
     tooltip.style.top = hpos.top-90+window.scrollY+'px'; //90 = tooltip height
     tooltip.style.visibility = 'visible';
+}
+
+function applyCode(code, text) {
+    alert("it worked:"+code+text)
 }
 
 // term_literal : [standard_name, ICD10_code, SNOMED_code]
@@ -152,3 +159,7 @@ var stterm_red = {
 var re = new RegExp((")"+Object.keys(stterm_green).join("|")+"(").reverse()+"(?! evah ton seod| on| ton)","ig");
 var re2 = new RegExp((")"+Object.keys(stterm_blue).join("|")+"(").reverse()+"(?! evah ton seod| on| ton)","ig");
 var re3 = new RegExp((")"+Object.keys(stterm_red).join("|")+"(").reverse()+"(?! evah ton seod| on| ton)","ig");
+
+function updateFhir(){
+    alert("not yet implemented")
+}

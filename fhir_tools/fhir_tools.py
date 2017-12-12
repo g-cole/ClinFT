@@ -10,7 +10,6 @@ def get_patient_info(pat_id):
 	"""
 	words
 	"""
-
 	smart = client.FHIRClient(settings=settings)
 	import fhirclient.models.patient as p
 	patient = p.Patient.read(pat_id, smart.server)
