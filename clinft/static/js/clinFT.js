@@ -31,8 +31,8 @@ function handleScroll() {
 
 function applyHighlights(text) {
     text = text
-        .replace(/\n$/g, '\n\n')// necessary for highlight/textarea alignment
-        // replace reversed found term into reversed highlight class
+        .replace(/\n$/g, '\n\n') //necessary for highlight/textarea alignment
+        //replace reversed found term into reversed highlight class
         .reverse().replace(re, '>kram/<$&>"pitloot kram neerg"=ssalc kram<').reverse()
         .reverse().replace(re2, '>kram/<$&>"pitloot kram eulb"=ssalc kram<').reverse()
         .reverse().replace(re3, '>kram/<$&>"pitloot kram der"=ssalc kram<').reverse();
@@ -46,14 +46,14 @@ document.addEventListener('DOMContentLoaded', function(event) {
         if (isIE){
             clinFTList[i].parentNode.getElementsByClassName('clinFT_highlights')[0].style.paddingRight = '2px';
         }
-        clinFTList[i].dispatchEvent(event); // apply highlights to each clinFT instance when page loads
+        clinFTList[i].dispatchEvent(event); //apply highlights to each clinFT instance when page loads
     }
 
-    // Create the tooltip element
+    //Create the tooltip element
     var tt = document.createElement('div');
     tt.id = 'tooltip';
     document.body.appendChild(tt);
-    // mouseout tooltip
+    //mouseout tooltip
     tt.addEventListener("mouseout", function(event){
         var e = event.toElement || event.relatedTarget;
         if (e.parentNode == this || e == this) {
@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
     }
 });
 
-// The highlights are behind the textarea, so chain the hover events
+//The highlights are behind the textarea, so chain the hover events
 function processMarks(){
     var markList = document.getElementsByClassName('mark');
     for (var i = 0; i < markList.length; i++) {
@@ -84,7 +84,7 @@ function processMarks(){
             if (tar != this) {
                 document.getElementById('tooltip').style.visibility = "hidden";
             }
-            tar.dispatchEvent(new Event('mousemove'));// Update this for IE compatibility (IE doesn't like "new Event" inline)
+            tar.dispatchEvent(new Event('mousemove')); //Update this for IE compatibility (IE doesn't like "new Event" inline)
         },false);
     }
 }
@@ -113,8 +113,8 @@ function handleHover(highlight) {
     }
     
     hpos = highlight.getBoundingClientRect();
-    tooltip.style.left = hpos.left-125+(hpos.width/2)+'px';// 125 = half tooltip width
-    tooltip.style.top = hpos.top-90+window.scrollY+'px';// 90 = tooltip height
+    tooltip.style.left = hpos.left-125+(hpos.width/2)+'px'; //125 = half tooltip width
+    tooltip.style.top = hpos.top-90+window.scrollY+'px'; //90 = tooltip height
     tooltip.style.visibility = 'visible';
 }
 
@@ -152,7 +152,7 @@ function remove_dx(dx) {
         document.getElementById('dxcode').innerHTML = temp_dx_text;
 }
 
-// term_literal : [standard_name, ICD10_code, SNOMED_code]
+//term_literal : [standard_name, ICD10_code, SNOMED_code]
 var stterm_green = {
     "esophageal varices" : ["Esophageal Varices", "I85.0", "308129003"],
     "esophageal varix" : ["Esophageal Varices", "I85.0", "308129003"],
@@ -191,7 +191,7 @@ var stterm_green = {
     "solitary oesophageal varices" : ["Solitary Varix of Esophagus", "I85.00", "721206006"],
     "solitary esophageal varices" : ["Solitary Varix of Esophagus", "I85.00", "721206006"],
     "solitary esophageal varix" : ["Solitary Varix of Esophagus", "I85.00", "721206006"]
-*/
+    */
 };
 var stterm_blue = {
     "dysphagia" : ["Dysphagia", "R13.1", "40739000"],
@@ -205,11 +205,22 @@ var stterm_red = {
 
 //Javascript doesn't support RegEx negative look-behinds, which could be used to detect negation terms before a word. However, it
 //does support negative look-aheads, so if we reverse the search string and regular expression, we can simulate negative look-behinds.
-//replaced:
 var re = new RegExp((")"+Object.keys(stterm_green).join("|")+"(").reverse()+"(?! evah ton seod| on| ton)","ig");
 var re2 = new RegExp((")"+Object.keys(stterm_blue).join("|")+"(").reverse()+"(?! evah ton seod| on| ton)","ig");
 var re3 = new RegExp((")"+Object.keys(stterm_red).join("|")+"(").reverse()+"(?! evah ton seod| on| ton)","ig");
 
 function updateFhir(){
-    alert("Saved successfully")
+    //working on it...
+    alert("Diagnosis code(s) saved successfully")
 }
+/*
+    url = window.location.href //current URL
+    xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET", url, true);
+    xmlhttp.onreadystatechange = function () { //Call a function when the state changes.
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            alert(xmlhttp.responseText)            
+        }
+    };
+    xmlhttp.send(JSON.stringify(global_dx));
+}*/

@@ -10,7 +10,7 @@ settings = {
 
 def get_patient_info(pat_id):
 	"""
-	words
+	returns patient id, name, dob, age, and gender from FHIR to FLASK
 	"""
 	smart = client.FHIRClient(settings=settings)
 	import fhirclient.models.patient as p
@@ -29,7 +29,7 @@ def get_patient_info(pat_id):
 
 def get_procedure_info(proc_id):
 	"""
-	more words
+	returns procedure type, indications, and dx list from FHIR to FLASK
 	"""
 	smart = client.FHIRClient(settings=settings)
 	import fhirclient.models.procedure as p
@@ -50,7 +50,6 @@ def get_procedure_info(proc_id):
 	
 	return {'exam_type' : exam_type,
 			'indications' : indications,
-			#'condition' : cond_fmt
 			'condition' : cond_code_desc
 			}
 
