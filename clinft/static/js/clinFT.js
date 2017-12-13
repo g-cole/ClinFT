@@ -198,7 +198,9 @@ var stterm_blue = {
     "gastritis" : ["Gastritis", "K29", "4556007"]
 };
 var stterm_red = {
-    "heartburn" : ["Heartburn", "R12", "722876002"]
+    "heartburn" : ["Heartburn", "R12", "722876002"],
+    "barretts esophagus" : ["Barretts Esophagus", "K22.7", "302914006"],
+    "barrett\'s esophagus" : ["Barretts Esophagus", "K22.7", "302914006"]
 };
 
 //Javascript doesn't support RegEx negative look-behinds, which could be used to detect negation terms before a word. However, it
