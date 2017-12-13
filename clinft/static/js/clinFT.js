@@ -194,7 +194,8 @@ var stterm_green = {
 */
 };
 var stterm_blue = {
-    "dysphagia" : ["Dysphagia", "R13.1", "40739000"]
+    "dysphagia" : ["Dysphagia", "R13.1", "40739000"],
+    "gastritis" : ["Gastritis", "K29", "4556007"]
 };
 var stterm_red = {
     "heartburn" : ["Heartburn", "R12", "722876002"]
