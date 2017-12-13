@@ -1,6 +1,10 @@
 # ClinFT
 Clinical free-text assistant
 
+Finds codable concepts in free-text fields to automatically add them to the associated structured data using FHIR. No extraneous dependencies (including jQuery).
+
+This is a proof-of-concept application for a term project at the University of Utah department of Biomedical Informatics. It should not be used in a production setting in its current state.
+
 Front-end demo (OUTDATED - highlights words starting with capital letters) can be viewed at https://g-cole.github.io/ClinFT/frontend_demo
 
 Anaconda/Miniconda instructions (terminal):
