@@ -38,27 +38,24 @@ def get_procedure_info(proc_id):
 	exam_type = proc.code.coding[0].display
 	indications = proc.reasonCode[0].text
 
-	cond_id_desc = []
+	cond_code_desc = []
 	for cond in proc.reasonReference:
 		cond_json = json.loads(urllib.request.urlopen(settings['api_base'] + '/Condition/' + cond.reference.split('/')[1]).read())
-		cond_id_desc.append(
-			(
+		cond_code_desc.append(
+			[
 				cond_json['code']['coding'][0]["code"],
 				cond_json['code']['coding'][0]['display']
-			)
+			]
 		)
-	cond_fmt = ""
-	for cond in cond_id_desc:
-		cond_fmt += cond[0] + ' : ' + cond[1] + ' <a style="color: #0000EE; cursor: pointer;" onClick="remove_dx(' + cond[0] + ')">x</a><br>'
-
-
-#push to FHIR server with "put" to update record
 	
 	return {'exam_type' : exam_type,
 			'indications' : indications,
-			'condition' : cond_fmt
+			#'condition' : cond_fmt
+			'condition' : cond_code_desc
 			}
 
 def calculate_age(born):
     today = date.today()
     return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
+
+#push to FHIR server with "put" to update record
