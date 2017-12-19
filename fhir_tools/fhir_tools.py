@@ -1,5 +1,6 @@
 from fhirclient import client
 from datetime import date
+from os import path
 import urllib.request
 import json
 
@@ -38,6 +39,7 @@ def get_procedure_info(proc_id):
 	exam_type = proc.code.coding[0].display
 	indications = proc.reasonCode[0].text
 
+	#ClinFhir doesn't access condition resources the same way as patients or procedures, so access via JSON
 	cond_code_desc = []
 	for cond in proc.reasonReference:
 		cond_json = json.loads(urllib.request.urlopen(settings['api_base'] + '/Condition/' + cond.reference.split('/')[1]).read())
@@ -57,4 +59,13 @@ def calculate_age(born):
     today = date.today()
     return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
 
+def get_terminology(domain_terminology):
+	troot = path.realpath(path.dirname(__file__))
+	#json_url = path.join(SITE_ROOT, "/terminologies", domain_terminology)
+	#json_url = url_for('static', filename='terminologies/' + domain_terminology)
+	with open(path.join(troot, 'terminologies', domain_terminology), 'r') as tfile:
+		tdata = json.load(tfile)
+	return tdata
+	#return json.loads(domain_terminology)
 #push to FHIR server with "put" to update record
+#http://www.hl7.org/implement/standards/fhir/http.html#create

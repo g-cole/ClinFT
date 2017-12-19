@@ -125,6 +125,9 @@
     <div class="savebtn" onclick="updateFhir()">Save</div>
 
     <script src="{{ url_for('static', filename = 'js/clinft.js') }}"></script>
+    <script type="text/javascript">
+        terminology = loadTerminology({{terminology|tojson}})
+    </script>
 
 </body>
 </html>

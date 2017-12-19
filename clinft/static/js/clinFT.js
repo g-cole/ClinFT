@@ -3,7 +3,7 @@
 
 var ua = window.navigator.userAgent.toLowerCase();
 var isIE = !!ua.match(/msie|trident\/7|edge/);
-var global_dx = []
+var global_dx = [];
 
 var clinFTList = document.getElementsByClassName('clinFT_textarea');
 
@@ -193,21 +193,57 @@ var stterm_green = {
     "solitary esophageal varix" : ["Solitary Varix of Esophagus", "I85.00", "721206006"]
     */
 };
-var stterm_blue = {
-    "dysphagia" : ["Dysphagia", "R13.1", "40739000"],
-    "gastritis" : ["Gastritis", "K29", "4556007"]
-};
+//var stterm_blue = {
+//    "dysphagia" : ["Dysphagia", "R13.1", "40739000"],
+//    "gastritis" : ["Gastritis", "K29", "4556007"]
+//};
 var stterm_red = {
     "heartburn" : ["Heartburn", "R12", "722876002"],
     "barretts esophagus" : ["Barretts Esophagus", "K22.7", "302914006"],
     "barrett\'s esophagus" : ["Barretts Esophagus", "K22.7", "302914006"]
 };
 
+var stterm_blue = {};
+function loadTerminology(t) {
+    //jt = JSON.parse(JSON.stringify(terminology));
+    for(i=0;i<t["blue"].length;i++) {
+        alert(t["blue"][i]["literal"]);
+        stterm_blue[t["blue"][i]["literal"]] = [t["blue"][i]["display"],
+                                                t["blue"][i]["ICD10"],
+                                                t["blue"][i]["SNOMED"]];
+    }
+    alert(stterm_blue["dysphagia"]);
+}
+/*
+function loadTerminology() {   
+    var treq = new XMLHttpRequest();
+    treq.overrideMimeType("application/json");
+    treq.open('GET', '{{ url_for("static", filename = "js/terminology.json") }}', true);
+    treq.onreadystatechange = function () {
+        if (treq.readyState == 4) {
+            var jsonTexto = treq.responseText;
+            stterm = JSON.parse(jsonTexto);
+            var re2 = new RegExp((")"+Object.keys(stterm.blue).join("|")+"(").reverse()+"(?! evah ton seod| on| ton)","ig");
+
+        }
+    }
+    treq.send(null);
+    //alert(stterm.blue)
+}
+
+*/
+
+
+
 //Javascript doesn't support RegEx negative look-behinds, which could be used to detect negation terms before a word. However, it
 //does support negative look-aheads, so if we reverse the search string and regular expression, we can simulate negative look-behinds.
 var re = new RegExp((")"+Object.keys(stterm_green).join("|")+"(").reverse()+"(?! evah ton seod| on| ton)","ig");
 var re2 = new RegExp((")"+Object.keys(stterm_blue).join("|")+"(").reverse()+"(?! evah ton seod| on| ton)","ig");
 var re3 = new RegExp((")"+Object.keys(stterm_red).join("|")+"(").reverse()+"(?! evah ton seod| on| ton)","ig");
+
+//
+//IF LOAD EXTERNAL JSON, instead of Object.keys(keys).join, do terminology.green.join
+//
 
 function updateFhir(){
     //working on it...
@@ -224,3 +260,43 @@ function updateFhir(){
     };
     xmlhttp.send(JSON.stringify(global_dx));
 }*/
+
+/*
+//FHIR TEMPLATE
+//Add 
+{
+    "resourceType": "Condition",
+    "patient" {
+        "reference": "XXX"
+    },
+    "code": {
+        "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "308129003",
+              "display": "Esophageal Varices"
+            }
+        ]
+    }
+    "clinicalStatus": "active",
+    "verificationStatus": "confirmed",
+    //"encounter": {
+    //    "reference": "Encounter/1309819"
+    //}
+
+//from response, get new id
+
+//Update procedure resource "reasonReference" with those ids
+"reasonReference": [
+    {
+      "reference": "Condition/8"
+    },
+    {
+      "reference": "Condition/9"
+    },
+    {
+      "reference": "Condition/10"
+    }
+  ]
+
+*/

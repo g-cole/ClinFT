@@ -1,0 +1,17 @@
+
+    {
+        "blue": [
+            {
+                "literal": "dysphagia",
+                "display": "Dysphagia",
+                "ICD10": "R13.1",
+                "SNOMED": "40739000"
+            },
+            {
+                "literal": "gastritis",
+                "display": "Gastritis",
+                "ICD10": "K29",
+                "SNOMED": "4556007"
+            }
+        ]
+    }

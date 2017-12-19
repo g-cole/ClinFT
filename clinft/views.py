@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import render_template, url_for
 from clinft import app
 from fhir_tools import fhir_tools
 
@@ -15,7 +15,8 @@ def proc_pick(patient_id):
 def proc_doc(patient_id, procedure_id):
 	patient = fhir_tools.get_patient_info(patient_id)
 	procedure = fhir_tools.get_procedure_info(procedure_id)
-	return render_template('index.html', title='Home', patient=patient, procedure=procedure)
+	terminology = fhir_tools.get_terminology("EGD_terminology.json")
+	return render_template('index.html', title='Home', patient=patient, procedure=procedure, terminology=terminology)
 
 #working on it...
 @app.route('/<patient_id>/<procedure_id>', methods=['POST', 'GET'])
