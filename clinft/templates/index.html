@@ -125,6 +125,10 @@
     <div class="savebtn" onclick="updateFhir()">Save</div>
 
     <script src="{{ url_for('static', filename = 'js/clinft.js') }}"></script>
+    <script type="text/javascript">
+        loadTerminology({{terminology|tojson}});
+        var proc_id = {{procedure.proc_id}};
+    </script>
 
 </body>
 </html>

@@ -1,6 +1,8 @@
 from fhirclient import client
 from datetime import date
+from os import path
 import urllib.request
+import requests
 import json
 
 settings = {
@@ -48,7 +50,8 @@ def get_procedure_info(proc_id):
 			]
 		)
 	
-	return {'exam_type' : exam_type,
+	return {'proc_id' : proc_id,
+			'exam_type' : exam_type,
 			'indications' : indications,
 			'condition' : cond_code_desc
 			}
@@ -57,4 +60,44 @@ def calculate_age(born):
     today = date.today()
     return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
 
-#push to FHIR server with "put" to update record
+def get_terminology(domain_terminology):
+	troot = path.realpath(path.dirname(__file__))
+	with open(path.join(troot, 'kb', domain_terminology), 'r') as tfile:
+		tdata = json.load(tfile)
+	return tdata
+
+def update_fhir(pat, proc, dx):
+	responses = ""
+	for d in dx:
+		JSON_cond_template = r"""
+{
+  "resourceType": "Condition",
+  "subject": {
+    "reference": "Patient/%s"
+  },
+  "code": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "%s",
+        "display": "%s"
+      }
+    ]
+  },
+  "clinicalStatus": "active",
+  "verificationStatus": "confirmed"
+}"""%(pat,d[0],d[1])
+		data = json.loads(JSON_cond_template)
+		url = settings['api_base']
+		data = json.loads(JSON_cond_template)
+		headers = {'content-type': 'application/json'}
+		response = requests.post(url, data=data, headers=headers)
+		print(response)
+		responses += str(response)
+	return responses
+
+
+
+
+
+#create analytics data structure, even if its not used

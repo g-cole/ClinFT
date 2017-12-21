@@ -1,17 +1,48 @@
 //Garrett Cole
-//University of Utah - BMI 6300 final project
+//University of Utah BMI term project
 
+//User agent match for IE formatting
 var ua = window.navigator.userAgent.toLowerCase();
 var isIE = !!ua.match(/msie|trident\/7|edge/);
-var global_dx = []
-
-var clinFTList = document.getElementsByClassName('clinFT_textarea');
 
 //add reverse() function to strings for RegEx negative look-behind simulation
 String.prototype.reverse = function () {
     return this.split('').reverse().join('');
 }
 
+//Initialize some global variables
+var global_dx = [];
+var stterm_green = {}, stterm_blue = {}, stterm_red = {};
+var re, re2, re3, terminology;
+var openTimeStamp = Date.now();
+
+//Javascript doesn't support RegEx negative look-behinds, which could be used to detect negation terms before a word. However it
+//does support negative look-aheads, so if we reverse the search string and regular expression, we can simulate negative look-behinds.
+function loadTerminology(t) {
+    //Originally the terminologies were hard-coded here. This function converts the JSON object back to the JS dicts.
+    //"loadTerminology()" is called from the HTML template with FLASK/Jinja passing in the JSON object.
+    for(i=0;i<t[0]["green"].length;i++) {
+        stterm_green[t[0]["green"][i]["literal"]] = [t[0]["green"][i]["display"],
+                                                t[0]["green"][i]["ICD10"],
+                                                t[0]["green"][i]["SNOMED"]];
+    }
+    re = new RegExp((")"+Object.keys(stterm_green).join("|")+"(").reverse()+"(?! evah ton seod| on| ton)","ig");
+    for(i=0;i<t[1]["blue"].length;i++) {
+        stterm_blue[t[1]["blue"][i]["literal"]] = [t[1]["blue"][i]["display"],
+                                                t[1]["blue"][i]["ICD10"],
+                                                t[1]["blue"][i]["SNOMED"]];
+    }
+    re2 = new RegExp((")"+Object.keys(stterm_blue).join("|")+"(").reverse()+"(?! evah ton seod| on| ton)","ig");
+    for(i=0;i<t[2]["red"].length;i++) {
+        stterm_red[t[2]["red"][i]["literal"]] = [t[2]["red"][i]["display"],
+                                                t[2]["red"][i]["ICD10"],
+                                                t[2]["red"][i]["SNOMED"]];
+    }
+    re3 = new RegExp((")"+Object.keys(stterm_red).join("|")+"(").reverse()+"(?! evah ton seod| on| ton)","ig");
+}
+
+//get list of all clinFT textareas on the page and add event listeners to them
+var clinFTList = document.getElementsByClassName('clinFT_textarea');
 for (var i = 0; i < clinFTList.length; i++) {
     clinFTList[i].addEventListener('input', handleInput, false);
     clinFTList[i].addEventListener('scroll', handleScroll, false);
@@ -131,7 +162,6 @@ function applyCode(code, desc) {
         temp_dx_text = "";
         for (var i=0;i<global_dx.length;i++) {
             temp_dx_text += global_dx[i][0] + ' : ' + global_dx[i][1] + ' <a style="color: #0000EE; cursor: pointer;" onClick="remove_dx(' + global_dx[i][0] + ')">x</a><br>';
-
         }
         document.getElementById('dxcode').innerHTML = temp_dx_text;
     } 
@@ -152,75 +182,18 @@ function remove_dx(dx) {
         document.getElementById('dxcode').innerHTML = temp_dx_text;
 }
 
-//term_literal : [standard_name, ICD10_code, SNOMED_code]
-var stterm_green = {
-    "esophageal varices" : ["Esophageal Varices", "I85.0", "308129003"],
-    "esophageal varix" : ["Esophageal Varices", "I85.0", "308129003"],
-    "oesophageal varices" : ["Esophageal Varices", "I85.0", "308129003"],
-    "oesophageal varix" : ["Esophageal Varices", "I85.0", "308129003"],
-    "bleeding esophageal varices" : ["Bleeding Esophageal Varices", "I85.01", "17709002"],
-    "bleeding esophageal varix" : ["Bleeding Esophageal Varices", "I85.01", "17709002"],
-    "bleeding oesophageal varices" : ["Bleeding Esophageal Varices", "I85.01", "17709002"],
-    "bleeding oesophageal varix" : ["Bleeding Esophageal Varices", "I85.01", "17709002"],
-    "oesophageal varix with bleeding" : ["Bleeding Esophageal Varices", "I85.01", "17709002"],
-    "esophageal varix with bleeding" : ["Bleeding Esophageal Varices", "I85.01", "17709002"],
-    "esophageal varices w bleeding" : ["Bleeding Esophageal Varices", "I85.01", "17709002"],
-    "oesophageal varices w bleeding" : ["Bleeding Esophageal Varices", "I85.01", "17709002"],
-    "oesophageal varix with blood" : ["Bleeding Esophageal Varices", "I85.01", "17709002"],
-    "esophageal varices with blood" : ["Bleeding Esophageal Varices", "I85.01", "17709002"],
-    "oesophageal varix w blood" : ["Bleeding Esophageal Varices", "I85.01", "17709002"],
-    "esophageal varices w blood" : ["Bleeding Esophageal Varices", "I85.01", "17709002"],
-    "oesophageal varix without bleeding" : ["Esophageal Varices Without Bleeding", "I85.00", "195476002"],
-    "esophageal varices without bleeding" : ["Esophageal Varices Without Bleeding", "I85.00", "195476002"],
-    "oesophageal varix without blood" : ["Esophageal Varices Without Bleeding", "I85.00", "195476002"],
-    "esophageal varices without blood" : ["Esophageal Varices Without Bleeding", "I85.00", "195476002"],
-    "oesophageal varix w/o bleeding" : ["Esophageal Varices Without Bleeding", "I85.00", "195476002"],
-    "esophageal varices w/o bleeding" : ["Esophageal Varices Without Bleeding", "I85.00", "195476002"],
-    "oesophageal varix w/o blood" : ["Esophageal Varices Without Bleeding", "I85.00", "195476002"],
-    "esophageal varices w/o blood" : ["Esophageal Varices Without Bleeding", "I85.00", "195476002"]
-    /*,
-    "downhill oesophageal varix" : ["Downhill Esophageal Varices", "I85.00", "721160006"],
-    "downhill oesophageal varices" : ["Downhill Esophageal Varices", "I85.00", "721160006"],
-    "downhill esophageal varices" : ["Downhill Esophageal Varices", "I85.00", "721160006"],
-    "downhill esophageal varix" : ["Downhill Esophageal Varices", "I85.00", "721160006"],
-    "solitary oesophageal varix" : ["Solitary Varix of Esophagus", "I85.00", "721206006"],
-    "solitary oesophageal varices" : ["Solitary Varix of Esophagus", "I85.00", "721206006"],
-    "solitary esophageal varices" : ["Solitary Varix of Esophagus", "I85.00", "721206006"],
-    "solitary esophageal varix" : ["Solitary Varix of Esophagus", "I85.00", "721206006"].
-    "solitary varix of oesophagus" : ["Solitary Varix of Esophagus", "I85.00", "721206006"],
-    "solitary oesophageal varices" : ["Solitary Varix of Esophagus", "I85.00", "721206006"],
-    "solitary esophageal varices" : ["Solitary Varix of Esophagus", "I85.00", "721206006"],
-    "solitary esophageal varix" : ["Solitary Varix of Esophagus", "I85.00", "721206006"]
-    */
-};
-var stterm_blue = {
-    "dysphagia" : ["Dysphagia", "R13.1", "40739000"],
-    "gastritis" : ["Gastritis", "K29", "4556007"]
-};
-var stterm_red = {
-    "heartburn" : ["Heartburn", "R12", "722876002"],
-    "barretts esophagus" : ["Barretts Esophagus", "K22.7", "302914006"],
-    "barrett\'s esophagus" : ["Barretts Esophagus", "K22.7", "302914006"]
-};
-
-//Javascript doesn't support RegEx negative look-behinds, which could be used to detect negation terms before a word. However, it
-//does support negative look-aheads, so if we reverse the search string and regular expression, we can simulate negative look-behinds.
-var re = new RegExp((")"+Object.keys(stterm_green).join("|")+"(").reverse()+"(?! evah ton seod| on| ton)","ig");
-var re2 = new RegExp((")"+Object.keys(stterm_blue).join("|")+"(").reverse()+"(?! evah ton seod| on| ton)","ig");
-var re3 = new RegExp((")"+Object.keys(stterm_red).join("|")+"(").reverse()+"(?! evah ton seod| on| ton)","ig");
-
+//send final dx list for processing by fhir_tools
 function updateFhir(){
-    //working on it...
-    alert("Diagnosis code(s) saved successfully")
-}
-/*
-    url = window.location.href //current URL
-    xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", url, true);
-    xmlhttp.onreadystatechange = function () { //Call a function when the state changes.
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("POST", "/update-fhir");
+    xmlhttp.setRequestHeader("Content-Type", "application/json");
+    xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            alert(xmlhttp.responseText)            
+            alert("Diagnosis code(s) saved successfully" + xmlhttp.responseText);           
+        }
+        else if (xmlhttp.readyState == 4 && xmlhttp.status != 200) {
+            alert("Error saving diagnosis codes");
         }
     };
-    xmlhttp.send(JSON.stringify(global_dx));
-}*/
+    xmlhttp.send(JSON.stringify(global_dx.concat(document.getElementById('patientId').value,proc_id,openTimeStamp,Date.now())));
+}

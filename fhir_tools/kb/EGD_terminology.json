@@ -1,0 +1,56 @@
+[
+    {
+        "green": [
+            {
+                "literal": "esophageal varices",
+                "display": "Esophageal Varices",
+                "ICD10": "I85.0",
+                "SNOMED": "308129003"
+            },
+            {
+                "literal": "oesophageal varices",
+                "display": "Esophageal Varices",
+                "ICD10": "I85.0",
+                "SNOMED": "308129003"
+            }
+        ]
+    },
+    {
+        "blue": [
+            {
+                "literal": "dysphagia",
+                "display": "Dysphagia",
+                "ICD10": "R13.1",
+                "SNOMED": "40739000"
+            },
+            {
+                "literal": "gastritis",
+                "display": "Gastritis",
+                "ICD10": "K29",
+                "SNOMED": "4556007"
+            }
+        ]
+    },
+    {
+        "red": [
+            {
+                "literal": "heartburn",
+                "display": "Heartburn",
+                "ICD10": "R12",
+                "SNOMED": "722876002"
+            },
+            {
+                "literal": "barretts esophagus",
+                "display": "Barretts Esophagus",
+                "ICD10": "K22.7",
+                "SNOMED": "302914006"
+            },
+            {
+                "literal": "barrett's esophagus",
+                "display": "Barretts Esophagus",
+                "ICD10": "K22.7",
+                "SNOMED": "302914006"
+            }
+        ]
+    }
+]
