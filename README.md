@@ -22,3 +22,6 @@ python startserver.py
 ```
 Application will run in browser at http://localhost:8000/01/05
 where "01" is the patient FHIR ID and "05" is procedure FHIR ID. These are the IDs from our open HSCP demo server.
+
+Demo video and rationale:
+[![ClinFT demo video](https://img.youtube.com/vi/CfDZTMjxvwo/0.jpg)](https://www.youtube.com/watch?v=CfDZTMjxvwo)
