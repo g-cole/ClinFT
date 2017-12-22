@@ -189,10 +189,10 @@ function updateFhir(){
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            alert("Diagnosis code(s) saved successfully" + xmlhttp.responseText);           
+            alert("Diagnosis code(s) sent successfully.\nServer responded: "+xmlhttp.responseText)        
         }
         else if (xmlhttp.readyState == 4 && xmlhttp.status != 200) {
-            alert("Error saving diagnosis codes");
+            alert("Error sending diagnosis code(s).");
         }
     };
     xmlhttp.send(JSON.stringify(global_dx.concat(document.getElementById('patientId').value,proc_id,openTimeStamp,Date.now())));
