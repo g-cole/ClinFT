@@ -9,7 +9,7 @@ This is a proof-of-concept application for a term project at the University of U
 
 Use case: Gastroenterology
 
-Most endoscopic note-writing software generates text and populates structured data using menu options. If the clinician uses a free-text option or otherwise modifies the note, that information is essentialy lost, not coded into the database and unusable unless NLP is used later. This application attempts to solve this problem by running basic NLP (JavaScript RegEx search + negation detection) as the clinician is writing the note. When a term from the data dictionary is found, it is highlighted and the clinician then has the option to hover over it and add the concept to the structured data.
+Most endoscopic note-writing software generates text and populates structured data using menu options. If the clinician uses a free-text option or otherwise modifies the note, that information is essentialy lost, not coded into the database and unusable unless NLP is used later. This application attempts to solve this problem by running basic NLP (JavaScript RegEx search + negation detection) as the clinician is writing the note. When a term from the JSON data dictionary is found, it is highlighted and the clinician then has the option to hover over it and add the concept to the structured data.
 
 Front-end demo (OUTDATED - highlights words starting with capital letters) can be viewed at https://g-cole.github.io/ClinFT/frontend_demo
 
