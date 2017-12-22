@@ -1,6 +1,9 @@
 //Garrett Cole
 //University of Utah BMI term project
 
+//I built upon the code from http://codersblock.com/blog/highlight-text-inside-a-textarea/,
+//which has an associated jquery plugin released under the MIT license
+
 //User agent match for IE formatting
 var ua = window.navigator.userAgent.toLowerCase();
 var isIE = !!ua.match(/msie|trident\/7|edge/);
