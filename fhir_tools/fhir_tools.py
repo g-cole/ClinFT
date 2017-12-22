@@ -144,8 +144,7 @@ def update_fhir(pat_id, proc_id, diagnoses):
     #Also check for removed diagnosis. This is more complicated than I originally thought...
 
 class SessionAnalytics(object):
-    """Creates objects with session details for analytics in a last-minute attempt for some points
-    by forcing a custom class somewhere"""
+    """Creates object with session details for analytics"""
     def __init__(self, session_id=0, open_timestamp=0, close_timestamp=0, diagnoses=None):
         """Initialize a session_analytics object"""
         if session_id == 0:
