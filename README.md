@@ -23,7 +23,7 @@ cd <your_git_projects_folder>/ClinFT
 python startserver.py
 ```
 Application will run in browser at http://localhost:8000/01/05
-where "01" is the patient FHIR ID and "05" is procedure FHIR ID. These are the IDs from our open HSCP demo server.
+where "01" is the patient FHIR ID and "05" is procedure FHIR ID. These are the IDs from the open HSCP demo server.
 
 Demo video and rationale:
 
